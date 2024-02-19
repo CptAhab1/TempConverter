@@ -6,8 +6,12 @@ CSC 512
 Lab 2
  */
 
-// This program will 
+// This program will read input of temperature in either Fahrenheit or Celsius, then convert
+// that temperature into the other unit.
+
 import java.util.Scanner;
+
+
 
 public class TempConverter{
 
@@ -21,32 +25,27 @@ public class TempConverter{
         System.out.print("\t[Q1] Enter a temperature in degrees (for example, 29.6): ");
 
         float temp = scanner.nextFloat();
+        scanner.nextLine();
 
         System.out.print("\t[Q2] Enter \'F\' (or \'f\') for Fahrenheit " +
                             "or \'C\' (or \'c\') for Celsius: ");
 
-        String tempTypeString = scanner.next();
-
-        char tempType = tempTypeString.charAt(0);
+        String tempTypeString = scanner.nextLine();
 
         System.out.println();
+
+        char tempType = Character.toLowerCase(tempTypeString.charAt(0));
+
+        Conversion conversion = new Conversion();
 
         float tempToC, tempToF;
 
         switch (tempType){
-            case 'C':
             case 'c':
-                tempToF = (9*temp/5)+32;
-                System.out.println("\t" + temp + " degrees Celsius = " +
-                                   String.format("%.2f",tempToF) +
-                                   " degrees Fahrenheit.\n");
+                conversion.displayResult(temp, conversion.convertCToF(temp), tempType);
                 break;
-            case 'F':
             case 'f':
-                tempToC = ((float)5/9)*(temp-32);
-                System.out.println("\t" + temp + " degrees Fahrenheit = " +
-                                   String.format("%.2f",tempToC) +
-                                   " degrees Celsius.\n");
+                conversion.displayResult(temp, conversion.convertFToC(temp), tempType);
                 break;
             default:
                 System.out.println("\n \tUnknown units -");
